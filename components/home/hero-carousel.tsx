@@ -69,7 +69,7 @@ export function HeroCarousel() {
 
   return (
     <section 
-      className="relative -mt-24 pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-navy text-white min-h-[600px] lg:min-h-[800px] flex items-center"
+      className="relative -mt-24 pt-36 lg:pt-48 pb-8 overflow-hidden bg-navy text-white"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -95,7 +95,7 @@ export function HeroCarousel() {
         </motion.div>
       </AnimatePresence>
 
-      <Container className="relative z-20 w-full -mt-32 lg:-mt-48">
+      <Container className="relative z-20 w-full pb-8">
         <div className="grid lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-8 xl:col-span-7">
             <AnimatePresence mode="wait">
@@ -201,7 +201,7 @@ export function HeroCarousel() {
       </Container>
 
       {/* Advanced Navigation Controls */}
-      <div className="absolute bottom-0 left-0 right-0 z-30 bg-gradient-to-t from-navy to-transparent pt-20 pb-8">
+      <div className="relative z-30 w-full pt-12 pb-8">
         <Container>
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             {/* Progress Bars */}
