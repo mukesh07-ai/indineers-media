@@ -95,7 +95,7 @@ export function HeroCarousel() {
         </motion.div>
       </AnimatePresence>
 
-      <Container className="relative z-20 w-full">
+      <Container className="relative z-20 w-full -mt-12 lg:-mt-24">
         <div className="grid lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-8 xl:col-span-7">
             <AnimatePresence mode="wait">
