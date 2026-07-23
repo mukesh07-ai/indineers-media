@@ -69,7 +69,7 @@ export function HeroCarousel() {
 
   return (
     <section 
-      className="relative -mt-24 pt-36 lg:pt-48 pb-8 overflow-hidden bg-navy text-white"
+      className="relative -mt-24 pt-28 lg:pt-32 pb-10 lg:pb-12 overflow-hidden bg-navy text-white min-h-[80vh] md:min-h-0 flex flex-col justify-center"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -95,8 +95,8 @@ export function HeroCarousel() {
         </motion.div>
       </AnimatePresence>
 
-      <Container className="relative z-20 w-full pb-8">
-        <div className="grid lg:grid-cols-12 gap-12 items-center">
+      <Container className="relative z-20 w-full pb-0">
+        <div className="grid lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-8 xl:col-span-7">
             <AnimatePresence mode="wait">
               <motion.div 
@@ -112,7 +112,7 @@ export function HeroCarousel() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.3, duration: 0.5 }}
-                  className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-white/10 backdrop-blur-md text-white font-medium text-sm mb-6 border border-white/20 shadow-xl"
+                  className="inline-flex items-center gap-2 py-1 px-3 rounded-full bg-white/10 backdrop-blur-md text-white font-medium text-xs mb-3 border border-white/20 shadow-xl"
                 >
                   <span className="flex h-2 w-2 rounded-full bg-saffron animate-pulse" />
                   {slides[current].tagline}
@@ -122,7 +122,7 @@ export function HeroCarousel() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4, duration: 0.6 }}
-                  className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 leading-tight text-white"
+                  className="text-4xl md:text-5xl lg:text-[3.5rem] font-bold tracking-tight mb-3 leading-tight text-white"
                 >
                   {slides[current].title} <br/>
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-saffron to-yellow-400">
@@ -134,7 +134,7 @@ export function HeroCarousel() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5, duration: 0.6 }}
-                  className="text-lg md:text-xl text-white/80 mb-10 max-w-xl leading-relaxed font-light"
+                  className="text-base md:text-lg text-white/80 mb-6 max-w-xl leading-relaxed font-light"
                 >
                   {slides[current].description}
                 </motion.p>
@@ -145,14 +145,14 @@ export function HeroCarousel() {
                   transition={{ delay: 0.6, duration: 0.6 }}
                   className="flex flex-col sm:flex-row gap-4"
                 >
-                  <Button size="lg" className="bg-saffron hover:bg-saffron/90 text-white border-0 shadow-lg shadow-saffron/25 text-base h-14 px-8 group overflow-hidden relative">
+                  <Button size="lg" className="bg-saffron hover:bg-saffron/90 text-white border-0 shadow-lg shadow-saffron/25 text-base h-12 px-8 group overflow-hidden relative">
                     <span className="relative z-10 flex items-center font-semibold tracking-wide">
                       {slides[current].primaryCTA} 
                       <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </span>
                     <div className="absolute inset-0 h-full w-0 bg-white/20 group-hover:w-full transition-[width] duration-300 ease-out" />
                   </Button>
-                  <Button size="lg" variant="secondary" className="border-white/20 text-white hover:bg-white/10 text-base h-14 px-8 backdrop-blur-sm group font-semibold tracking-wide">
+                  <Button size="lg" variant="secondary" className="border-white/20 text-white hover:bg-white/10 text-base h-12 px-8 backdrop-blur-sm group font-semibold tracking-wide">
                     <PlayCircle className="mr-2 w-5 h-5 group-hover:scale-110 transition-transform text-saffron" /> 
                     {slides[current].secondaryCTA}
                   </Button>
@@ -162,7 +162,7 @@ export function HeroCarousel() {
           </div>
 
           {/* Interactive Right Side - Floating Cards */}
-          <div className="hidden lg:block lg:col-span-4 xl:col-span-5 relative h-[400px]">
+          <div className="hidden lg:block lg:col-span-4 xl:col-span-5 relative h-[320px]">
              <AnimatePresence mode="wait">
                <motion.div
                   key={`badge-${current}`}
@@ -172,9 +172,9 @@ export function HeroCarousel() {
                   transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.2 }}
                   className="absolute right-0 top-1/2 -translate-y-1/2"
                >
-                  <div className="bg-white/10 backdrop-blur-xl border border-white/20 p-8 rounded-3xl shadow-2xl w-80 transform hover:-translate-y-2 hover:shadow-saffron/20 transition-all duration-300 group">
-                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-saffron to-yellow-500 flex items-center justify-center mb-6 shadow-lg shadow-saffron/30 group-hover:scale-110 transition-transform">
-                      {React.createElement(slides[current].badgeIcon, { className: "w-8 h-8 text-white" })}
+                  <div className="bg-white/10 backdrop-blur-xl border border-white/20 p-6 rounded-3xl shadow-2xl w-72 transform hover:-translate-y-2 hover:shadow-saffron/20 transition-all duration-300 group">
+                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-saffron to-yellow-500 flex items-center justify-center mb-4 shadow-lg shadow-saffron/30 group-hover:scale-110 transition-transform">
+                      {React.createElement(slides[current].badgeIcon, { className: "w-6 h-6 text-white" })}
                     </div>
                     <h3 className="text-2xl font-bold text-white mb-3">{slides[current].badgeText}</h3>
                     <p className="text-white/70 text-sm leading-relaxed">{slides[current].badgeDesc}</p>
@@ -201,7 +201,7 @@ export function HeroCarousel() {
       </Container>
 
       {/* Advanced Navigation Controls */}
-      <div className="relative z-30 w-full pt-12 pb-8">
+      <div className="relative z-30 w-full pt-4 pb-2">
         <Container>
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             {/* Progress Bars */}

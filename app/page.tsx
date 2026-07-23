@@ -8,6 +8,7 @@ import { AutoScrollMarquee } from "@/components/ui/auto-scroll-marquee"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { ArrowRight, CheckCircle2, ChevronRight, PlayCircle, Users, BookOpen, Building, Briefcase } from "lucide-react"
 import { HeroCarousel } from "@/components/home/hero-carousel"
+import { TestimonialCarousel } from "@/components/home/testimonial-carousel"
 
 export default function Home() {
   return (
@@ -17,7 +18,7 @@ export default function Home() {
       <HeroCarousel />
 
       {/* 2. IMPACT NUMBERS */}
-      <section className="relative -mt-12 z-30">
+      <section className="relative z-30 -mt-10 md:-mt-12 pb-12">
         <Container>
           <div className="bg-white rounded-2xl shadow-xl border border-black/5 p-8 md:p-12">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x divide-black/5">
@@ -137,7 +138,7 @@ export default function Home() {
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
             <div className="max-w-2xl">
               <span className="text-saffron font-semibold tracking-wider uppercase text-sm block mb-3">Our Works</span>
-              <h2 className="text-4xl md:text-5xl font-bold tracking-tight">Key Projects & Initiatives</h2>
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white">Key Projects & Initiatives</h2>
             </div>
             <Link href="/projects">
               <Button variant="secondary" className="border-white/20 text-white hover:bg-white/10">
@@ -148,21 +149,34 @@ export default function Home() {
 
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              { title: "PMKVY Training", state: "Madhya Pradesh", img: "https://images.unsplash.com/photo-1544928147-79a2dbc1f389?q=80&w=2000&auto=format&fit=crop", category: "Govt Skilling" },
-              { title: "FoSTaC Certification", state: "Bihar", img: "https://images.unsplash.com/photo-1606787366850-de6330128bfc?q=80&w=2000&auto=format&fit=crop", category: "Food Safety" },
-              { title: "Drone Pilot Training", state: "Maharashtra", img: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=2000&auto=format&fit=crop", category: "Technology" },
+              { title: "PMKVY Training", state: "Madhya Pradesh", img: "https://images.unsplash.com/photo-1544928147-79a2dbc1f389?q=80&w=2000&auto=format&fit=crop", category: "Govt Skilling", desc: "Equipping rural youth with industry-relevant skills under the flagship PMKVY scheme, bridging the employability gap." },
+              { title: "FoSTaC Certification", state: "Bihar", img: "https://images.unsplash.com/photo-1606787366850-de6330128bfc?q=80&w=2000&auto=format&fit=crop", category: "Food Safety", desc: "Training food handlers in hygiene and safety standards, ensuring compliance with FSSAI regulations across the state." },
+              { title: "Drone Pilot Training", state: "Maharashtra", img: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=2000&auto=format&fit=crop", category: "Technology", desc: "Next-generation drone pilot certification program aimed at creating specialized professionals for agriculture and surveying." },
             ].map((project, i) => (
               <div key={i} className="group relative rounded-3xl overflow-hidden aspect-[4/5] cursor-pointer">
-                <Image src={project.img} alt={project.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/40 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                  <span className="inline-block py-1 px-3 rounded-full bg-saffron text-white text-xs font-bold uppercase tracking-wider mb-3">
+                <Image src={project.img} alt={project.title} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
+                
+                {/* Dynamic Gradient Background */}
+                <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/40 to-transparent group-hover:bg-navy/80 transition-colors duration-500 backdrop-blur-[2px] group-hover:backdrop-blur-sm opacity-100" />
+                
+                {/* Default State (Fades out on hover) */}
+                <div className="absolute inset-0 flex flex-col justify-end p-8 transition-all duration-500 group-hover:opacity-0 group-hover:translate-y-8">
+                  <span className="w-max py-1 px-3 rounded-full bg-saffron text-white text-xs font-bold uppercase tracking-wider mb-3">
                     {project.category}
                   </span>
-                  <h3 className="text-2xl font-bold mb-1">{project.title}</h3>
+                  <h3 className="text-2xl font-bold mb-1 text-white">{project.title}</h3>
                   <p className="text-white/70 flex items-center text-sm">
                     <span className="w-1.5 h-1.5 rounded-full bg-saffron mr-2" /> {project.state}
                   </p>
+                </div>
+
+                {/* Hover Reveal State (Fades in on hover) */}
+                <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-8 opacity-0 translate-y-8 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0">
+                  <h3 className="text-3xl font-bold mb-4 text-saffron">{project.title}</h3>
+                  <p className="text-white/90 text-lg leading-relaxed mb-8">{project.desc}</p>
+                  <div className="flex items-center gap-2 text-white font-semibold group/btn">
+                    Read Full Case Study <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
+                  </div>
                 </div>
               </div>
             ))}
@@ -230,33 +244,7 @@ export default function Home() {
             title="What Our Candidates Say"
             className="mb-16"
           />
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              { name: "Rahul Sharma", course: "Drone Pilot Training", text: "The training was hands-on and extremely professional. Within a month of completing the course, I secured a job as a licensed drone operator." },
-              { name: "Priya Singh", course: "Retail Management", text: "Indianeers Media gave me the confidence to step into the corporate world. Their placement support is unmatched and they truly care about our success." },
-              { name: "Amit Kumar", course: "Solar PV Installer", text: "Learning about renewable energy was a game changer for me. The practical labs and expert trainers made complex topics easy to understand." },
-            ].map((testimonial, i) => (
-              <Card key={i} className="bg-white shadow-lg border-black/5 hover:-translate-y-2 transition-transform duration-300">
-                <CardContent className="p-8">
-                  <div className="text-saffron mb-6">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M14.017 21L16.411 14.996C16.593 14.509 16.577 13.979 16.368 13.504C16.159 13.029 15.776 12.651 15.289 12.459L12.41 11.326L14.017 3H19.983L18.376 11.326L21.255 12.459C21.742 12.651 22.125 13.029 22.334 13.504C22.543 13.979 22.559 14.509 22.377 14.996L19.983 21H14.017ZM5.017 21L7.411 14.996C7.593 14.509 7.577 13.979 7.368 13.504C7.159 13.029 6.776 12.651 6.289 12.459L3.41 11.326L5.017 3H10.983L9.376 11.326L12.255 12.459C12.742 12.651 13.125 13.029 13.334 13.504C13.543 13.979 13.559 14.509 13.377 14.996L10.983 21H5.017Z" />
-                    </svg>
-                  </div>
-                  <p className="text-ink/80 text-lg mb-8 italic leading-relaxed">"{testimonial.text}"</p>
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-navy/10 flex items-center justify-center font-bold text-navy">
-                      {testimonial.name.charAt(0)}
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-navy">{testimonial.name}</h4>
-                      <p className="text-sm text-ink/60">{testimonial.course}</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+          <TestimonialCarousel />
         </Container>
       </section>
 
