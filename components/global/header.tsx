@@ -91,22 +91,22 @@ export function Header() {
             })}
           </nav>
 
-          <div className="hidden lg:flex items-center gap-4">
+          <div className="flex items-center gap-3">
             <Link href="/what-we-do">
-              <Button className="rounded-full bg-navy text-white hover:bg-saffron hover:text-white transition-colors duration-300 shadow-md hover:shadow-lg shadow-navy/20 hover:shadow-saffron/20 px-6">
+              <Button className="rounded-full bg-navy text-white hover:bg-saffron hover:text-white transition-colors duration-300 shadow-md hover:shadow-lg shadow-navy/20 hover:shadow-saffron/20 px-4 h-9 text-xs sm:px-6 sm:h-10 sm:text-sm">
                 Explore Programs
               </Button>
             </Link>
-          </div>
 
-          {/* Mobile Menu Toggle */}
-          <button
-            className="lg:hidden p-2.5 rounded-full bg-navy/5 text-navy hover:bg-navy/10 transition-colors"
-            onClick={() => setIsMobileMenuOpen(true)}
-            aria-label="Open menu"
-          >
-            <Menu className="w-5 h-5" />
-          </button>
+            {/* Mobile Menu Toggle */}
+            <button
+              className="lg:hidden p-2 rounded-full bg-navy/5 text-navy hover:bg-navy/10 transition-colors"
+              onClick={() => setIsMobileMenuOpen(true)}
+              aria-label="Open menu"
+            >
+              <Menu className="w-5 h-5" />
+            </button>
+          </div>
         </motion.header>
       </div>
 
