@@ -57,7 +57,7 @@ export function Header() {
                 className="object-contain p-1"
               />
             </div>
-            <span className="font-bold text-lg md:text-xl text-navy tracking-tight group-hover:text-saffron transition-colors hidden sm:block">
+            <span className="font-bold text-lg md:text-xl text-navy tracking-tight group-hover:text-saffron transition-colors">
               INDIANEERS<span className="text-saffron">.</span>
             </span>
           </Link>
@@ -92,7 +92,7 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-3">
-            <Link href="/what-we-do">
+            <Link href="/what-we-do" className="hidden sm:block">
               <Button className="rounded-full bg-navy text-white hover:bg-saffron hover:text-white transition-colors duration-300 shadow-md hover:shadow-lg shadow-navy/20 hover:shadow-saffron/20 px-4 h-9 text-xs sm:px-6 sm:h-10 sm:text-sm">
                 Explore Programs
               </Button>
