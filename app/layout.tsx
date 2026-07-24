@@ -22,8 +22,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${bricolage.variable} antialiased`}>
-      <body className="bg-offwhite text-ink font-sans min-h-screen flex flex-col">
+    <html lang="en" className={`${bricolage.variable} antialiased overflow-x-hidden`}>
+      <body className="bg-offwhite text-ink font-sans min-h-screen flex flex-col overflow-x-hidden">
         <Header />
         <main className="flex-1 pt-24">{children}</main>
         <Footer />
