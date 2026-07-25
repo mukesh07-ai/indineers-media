@@ -44,10 +44,10 @@ export function StatCounter({
 
   return (
     <div ref={inViewRef} className={cn("flex flex-col items-center text-center", className)} {...props}>
-      <span ref={ref} className="text-4xl md:text-5xl font-bold text-navy tracking-tight">
+      <span ref={ref} className="text-4xl md:text-5xl font-bold text-navy dark:text-slate-100 tracking-tight">
         {prefix}{start.toLocaleString()}{suffix}
       </span>
-      {label && <span className="mt-2 text-sm font-medium text-ink/70 uppercase tracking-widest">{label}</span>}
+      {label && <span className="mt-2 text-sm font-medium text-ink/70 dark:text-slate-400 uppercase tracking-widest">{label}</span>}
     </div>
   )
 }

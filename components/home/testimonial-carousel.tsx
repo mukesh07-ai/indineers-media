@@ -65,7 +65,7 @@ export function TestimonialCarousel() {
             transition={{ duration: 0.5, ease: "easeInOut" }}
             className="w-full"
           >
-            <Card className="bg-white shadow-xl shadow-navy/5 border-black/5 hover:-translate-y-1 transition-transform duration-300 mx-4 sm:mx-12">
+            <Card className="bg-white dark:bg-slate-900 shadow-xl shadow-navy/5 dark:shadow-[0_8px_32px_rgba(0,0,0,0.5)] border-black/5 dark:border-white/10 hover:-translate-y-1 transition-transform duration-300 mx-4 sm:mx-12">
               <CardContent className="p-8 md:p-12 relative">
                 {/* Decorative Quote Icon */}
                 <div className="absolute top-8 left-8 text-saffron/20 hidden md:block">
@@ -80,12 +80,12 @@ export function TestimonialCarousel() {
                   </div>
                   
                   <div className="flex-1">
-                    <p className="text-ink/80 text-xl md:text-2xl mb-8 italic leading-relaxed font-medium">
+                    <p className="text-ink/80 dark:text-slate-300 text-xl md:text-2xl mb-8 italic leading-relaxed font-medium">
                       "{TESTIMONIALS[currentIndex].text}"
                     </p>
                     
                     <div>
-                      <h4 className="font-bold text-navy text-lg">{TESTIMONIALS[currentIndex].name}</h4>
+                      <h4 className="font-bold text-navy dark:text-slate-100 text-lg">{TESTIMONIALS[currentIndex].name}</h4>
                       <p className="text-sm font-semibold text-saffron uppercase tracking-wider">{TESTIMONIALS[currentIndex].course}</p>
                     </div>
                   </div>
@@ -100,7 +100,7 @@ export function TestimonialCarousel() {
       <div className="flex items-center justify-center gap-4 mt-8">
         <button 
           onClick={prev}
-          className="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center text-navy hover:bg-navy hover:text-white transition-colors"
+          className="w-10 h-10 rounded-full border border-black/10 dark:border-white/20 flex items-center justify-center text-navy dark:text-slate-300 hover:bg-navy hover:text-white dark:hover:bg-white dark:hover:text-navy transition-colors"
         >
           <ChevronLeft className="w-5 h-5" />
         </button>
@@ -111,7 +111,7 @@ export function TestimonialCarousel() {
               key={idx}
               onClick={() => setCurrentIndex(idx)}
               className={`h-2 rounded-full transition-all duration-300 ${
-                idx === currentIndex ? "w-8 bg-saffron" : "w-2 bg-black/10 hover:bg-black/20"
+                idx === currentIndex ? "w-8 bg-saffron" : "w-2 bg-black/10 dark:bg-white/20 hover:bg-black/20 dark:hover:bg-white/40"
               }`}
             />
           ))}
@@ -119,7 +119,7 @@ export function TestimonialCarousel() {
 
         <button 
           onClick={next}
-          className="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center text-navy hover:bg-navy hover:text-white transition-colors"
+          className="w-10 h-10 rounded-full border border-black/10 dark:border-white/20 flex items-center justify-center text-navy dark:text-slate-300 hover:bg-navy hover:text-white dark:hover:bg-white dark:hover:text-navy transition-colors"
         >
           <ChevronRight className="w-5 h-5" />
         </button>

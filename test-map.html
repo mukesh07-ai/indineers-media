@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<body>
+<svg id="map" viewBox="0 0 612 696" width="612" height="696" style="border: 1px solid black; background: #0A192F;">
+</svg>
+<script>
+const India = require('./node_modules/@svg-maps/india').default;
+const svg = document.getElementById('map');
+India.locations.forEach(loc => {
+  const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  path.setAttribute('d', loc.path);
+  path.setAttribute('fill', '#3D3A7A');
+  path.setAttribute('stroke', 'white');
+  svg.appendChild(path);
+});
+</script>
+</body>
+</html>

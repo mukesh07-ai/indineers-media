@@ -21,7 +21,7 @@ export function Tabs({ defaultValue, children, className }: { defaultValue: stri
 
 export function TabsList({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
-    <div className={cn("flex space-x-2 overflow-x-auto pb-2 border-b border-black/10 no-scrollbar", className)}>
+    <div className={cn("flex space-x-2 overflow-x-auto pb-2 border-b border-black/10 dark:border-white/10 no-scrollbar", className)}>
       {children}
     </div>
   )
@@ -38,7 +38,7 @@ export function TabsTrigger({ value, children, className }: { value: string; chi
       onClick={() => context.setActiveTab(value)}
       className={cn(
         "px-4 py-2 text-sm font-medium transition-colors border-b-2 whitespace-nowrap",
-        isActive ? "border-saffron text-saffron" : "border-transparent text-ink/70 hover:text-navy hover:border-black/20",
+        isActive ? "border-saffron text-saffron" : "border-transparent text-ink/70 dark:text-slate-400 hover:text-navy dark:hover:text-slate-100 hover:border-black/20 dark:hover:border-white/20",
         className
       )}
     >

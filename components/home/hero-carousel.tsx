@@ -69,7 +69,7 @@ export function HeroCarousel() {
 
   return (
     <section 
-      className="relative -mt-24 pt-28 lg:pt-32 pb-10 lg:pb-12 overflow-hidden bg-navy text-white min-h-[80vh] md:min-h-0 flex flex-col justify-center"
+      className="relative -mt-24 pt-28 lg:pt-32 pb-10 lg:pb-12 overflow-hidden bg-navy dark:bg-slate-950 text-white min-h-[80vh] md:min-h-0 flex flex-col justify-center"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -83,8 +83,8 @@ export function HeroCarousel() {
           className="absolute inset-0 z-0"
         >
           {/* Enhanced overlay gradient for better text readability and premium feel */}
-          <div className="absolute inset-0 bg-gradient-to-r from-navy/95 via-navy/80 to-transparent z-10" />
-          <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-transparent to-transparent z-10" />
+          <div className="absolute inset-0 bg-gradient-to-r from-navy/95 dark:from-slate-950/95 via-navy/80 dark:via-slate-950/80 to-transparent z-10" />
+          <div className="absolute inset-0 bg-gradient-to-t from-navy/90 dark:from-slate-950/90 via-transparent to-transparent z-10" />
           <Image 
             src={slides[current].image}
             alt={slides[current].title}
@@ -145,14 +145,14 @@ export function HeroCarousel() {
                   transition={{ delay: 0.6, duration: 0.6 }}
                   className="flex flex-col sm:flex-row gap-4"
                 >
-                  <Button size="lg" className="bg-saffron hover:bg-saffron/90 text-white border-0 shadow-lg shadow-saffron/25 text-base h-12 px-8 group overflow-hidden relative">
+                  <Button size="lg" className="bg-saffron hover:bg-saffron/90 text-white border-0 shadow-[0_8px_32px_rgba(255,160,0,0.3)] text-base h-12 px-8 group overflow-hidden relative">
                     <span className="relative z-10 flex items-center font-semibold tracking-wide">
                       {slides[current].primaryCTA} 
                       <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </span>
                     <div className="absolute inset-0 h-full w-0 bg-white/20 group-hover:w-full transition-[width] duration-300 ease-out" />
                   </Button>
-                  <Button size="lg" variant="secondary" className="border-white/20 text-white hover:bg-white/10 text-base h-12 px-8 backdrop-blur-sm group font-semibold tracking-wide">
+                  <Button size="lg" variant="glass-dark" className="text-base h-12 px-8 group font-semibold tracking-wide">
                     <PlayCircle className="mr-2 w-5 h-5 group-hover:scale-110 transition-transform text-saffron" /> 
                     {slides[current].secondaryCTA}
                   </Button>
