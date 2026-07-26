@@ -6,7 +6,7 @@ import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { ChevronDown, Menu, X } from "lucide-react"
-import { motion, AnimatePresence } from "framer-motion"
+import { m, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { LanguageSelector } from "@/components/ui/language-selector"
 import { ThemeToggle } from "@/components/ui/theme-toggle"
@@ -45,12 +45,12 @@ export function Header() {
   return (
     <>
       <div className="fixed top-0 inset-x-0 z-50 flex justify-center px-4 pt-4 sm:pt-6 pointer-events-none">
-        <motion.header 
+        <m.header 
           initial={{ y: -100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ type: "spring", stiffness: 100, damping: 20 }}
           className={cn(
-            "pointer-events-auto w-full max-w-[1400px] flex items-center justify-between gap-4 rounded-full transition-all duration-500 whitespace-nowrap",
+            "pointer-events-auto w-full max-w-[1400px] flex items-center justify-between gap-4 rounded-full transition duration-500 whitespace-nowrap",
             scrolled 
               ? "bg-white/40 dark:bg-slate-900/60 backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.1)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.4)] border border-white/40 dark:border-white/10 h-14 px-6" 
               : "bg-white/50 dark:bg-slate-900/50 backdrop-blur-xl shadow-lg border border-white/40 dark:border-white/10 h-16 px-6 md:px-8"
@@ -58,7 +58,7 @@ export function Header() {
         >
           <Link href="/" className="flex items-center gap-2 lg:gap-4 group shrink-0">
             <div className={cn(
-              "relative rounded-full overflow-hidden bg-white dark:bg-slate-800 shadow-md flex items-center justify-center group-hover:shadow-lg transition-all duration-300 group-hover:scale-105 border border-black/5 dark:border-white/5 z-10",
+              "relative rounded-full overflow-hidden bg-white dark:bg-slate-800 shadow-md flex items-center justify-center group-hover:shadow-lg transition duration-300 group-hover:scale-105 border border-black/5 dark:border-white/5 z-10",
               scrolled ? "w-10 h-10" : "w-12 h-12"
             )}>
               <Image 
@@ -90,7 +90,7 @@ export function Header() {
                     {link.name}
                   </span>
                   {isActive && (
-                    <motion.div
+                    <m.div
                       layoutId="activeNav"
                       className="absolute inset-0 bg-saffron/10 rounded-full border border-saffron/20"
                       transition={{ type: "spring", stiffness: 200, damping: 20 }}
@@ -107,7 +107,7 @@ export function Header() {
               onMouseEnter={() => setIsMoreDropdownOpen(true)}
               onMouseLeave={() => setIsMoreDropdownOpen(false)}
             >
-              <button className="relative z-10 text-sm font-semibold text-navy/70 dark:text-slate-400 group-hover:text-navy dark:group-hover:text-slate-200 transition-colors duration-300 flex items-center gap-1 outline-none">
+              <button type="button" className="relative z-10 text-sm font-semibold text-navy/70 dark:text-slate-400 group-hover:text-navy dark:group-hover:text-slate-200 transition-colors duration-300 flex items-center gap-1 outline-none">
                 More 
                 <ChevronDown className={cn(
                   "w-4 h-4 transition-transform duration-300",
@@ -118,7 +118,7 @@ export function Header() {
               
               <AnimatePresence>
                 {isMoreDropdownOpen && (
-                  <motion.div
+                  <m.div
                     initial={{ opacity: 0, y: 10, scale: 0.95 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 10, scale: 0.95 }}
@@ -132,14 +132,14 @@ export function Header() {
                           <Link
                             key={link.name}
                             href={link.href}
-                            className="px-4 py-2.5 text-sm font-semibold text-navy/80 dark:text-slate-300 hover:text-saffron dark:hover:text-saffron hover:bg-black/5 dark:hover:bg-white/10 rounded-xl transition-all"
+                            className="px-4 py-2.5 text-sm font-semibold text-navy/80 dark:text-slate-300 hover:text-saffron dark:hover:text-saffron hover:bg-black/5 dark:hover:bg-white/10 rounded-xl transition-colors"
                           >
                             {link.name}
                           </Link>
                         ))}
                       </div>
                     </div>
-                  </motion.div>
+                  </m.div>
                 )}
               </AnimatePresence>
             </div>
@@ -157,6 +157,7 @@ export function Header() {
 
             {/* Mobile Menu Toggle */}
             <button
+              type="button"
               className="lg:hidden p-2 rounded-full bg-navy/5 dark:bg-white/5 text-navy dark:text-slate-300 hover:bg-navy/10 dark:hover:bg-white/10 transition-colors"
               onClick={() => setIsMobileMenuOpen(true)}
               aria-label="Open menu"
@@ -164,21 +165,25 @@ export function Header() {
               <Menu className="w-5 h-5" />
             </button>
           </div>
-        </motion.header>
+        </m.header>
       </div>
 
       {/* Mobile Drawer */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <div className="fixed inset-0 z-[100] flex justify-end">
-            <motion.div
+            <m.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               className="fixed inset-0 bg-navy/40 dark:bg-black/60 backdrop-blur-md"
               onClick={() => setIsMobileMenuOpen(false)}
+              onKeyDown={(e) => { if (e.key === 'Escape' || e.key === 'Enter' || e.key === ' ') setIsMobileMenuOpen(false) }}
+              role="button"
+              tabIndex={0}
+              aria-label="Close mobile menu backdrop"
             />
-            <motion.div 
+            <m.div 
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
@@ -188,6 +193,8 @@ export function Header() {
               <div className="flex justify-between items-center mb-10">
                 <span className="font-bold text-xl text-navy dark:text-slate-100 tracking-tight">INDIANEERS<span className="text-saffron">.</span></span>
                 <button 
+                  type="button"
+                  aria-label="Close menu"
                   onClick={() => setIsMobileMenuOpen(false)} 
                   className="p-2 bg-black/5 dark:bg-white/10 rounded-full text-navy dark:text-slate-300 hover:bg-saffron hover:text-white dark:hover:bg-saffron transition-colors"
                 >
@@ -203,7 +210,7 @@ export function Header() {
                       href={link.href}
                       onClick={() => setIsMobileMenuOpen(false)}
                       className={cn(
-                        "text-lg font-semibold px-4 py-3 rounded-2xl transition-all",
+                        "text-lg font-semibold px-4 py-3 rounded-2xl transition",
                         isActive 
                           ? "bg-saffron/10 text-saffron border border-saffron/20" 
                           : "text-navy/80 dark:text-slate-300 hover:bg-black/5 dark:hover:bg-white/10 hover:text-navy dark:hover:text-white"
@@ -223,7 +230,7 @@ export function Header() {
                       key={link.name}
                       href={link.href}
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-base font-medium px-4 py-3 rounded-2xl text-navy/80 dark:text-slate-400 hover:bg-black/5 dark:hover:bg-white/10 hover:text-navy dark:hover:text-slate-200 transition-all"
+                      className="text-base font-medium px-4 py-3 rounded-2xl text-navy/80 dark:text-slate-400 hover:bg-black/5 dark:hover:bg-white/10 hover:text-navy dark:hover:text-slate-200 transition-colors"
                     >
                       {link.name}
                     </Link>
@@ -247,7 +254,7 @@ export function Header() {
                   </Button>
                 </Link>
               </div>
-            </motion.div>
+            </m.div>
           </div>
         )}
       </AnimatePresence>

@@ -3,11 +3,10 @@
 import * as React from "react"
 import { useState, useEffect } from "react"
 import Image from "next/image"
-import { motion, AnimatePresence } from "framer-motion"
+import { m, AnimatePresence } from "framer-motion"
 import { ArrowRight, PlayCircle, ChevronLeft, ChevronRight, Award, Users, BookOpen } from "lucide-react"
 import { Container } from "@/components/ui/container"
 import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
 
 const slides = [
   {
@@ -74,7 +73,7 @@ export function HeroCarousel() {
       onMouseLeave={() => setIsHovered(false)}
     >
       <AnimatePresence mode="wait">
-        <motion.div
+        <m.div
           key={current}
           initial={{ opacity: 0, scale: 1.05 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -89,17 +88,18 @@ export function HeroCarousel() {
             src={slides[current].image}
             alt={slides[current].title}
             fill
+            sizes="100vw"
             className="object-cover opacity-60 mix-blend-overlay"
             priority={current === 0}
           />
-        </motion.div>
+        </m.div>
       </AnimatePresence>
 
       <Container className="relative z-20 w-full pb-0">
         <div className="grid lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-8 xl:col-span-7">
             <AnimatePresence mode="wait">
-              <motion.div 
+              <m.div 
                 key={current}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -108,7 +108,7 @@ export function HeroCarousel() {
                 className="max-w-2xl"
               >
                 {/* Floating Badge */}
-                <motion.div 
+                <m.div 
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.3, duration: 0.5 }}
@@ -116,9 +116,9 @@ export function HeroCarousel() {
                 >
                   <span className="flex h-2 w-2 rounded-full bg-saffron animate-pulse" />
                   {slides[current].tagline}
-                </motion.div>
+                </m.div>
                 
-                <motion.h1 
+                <m.h1 
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4, duration: 0.6 }}
@@ -128,18 +128,18 @@ export function HeroCarousel() {
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-saffron to-yellow-400">
                     {slides[current].highlight}
                   </span>
-                </motion.h1>
+                </m.h1>
 
-                <motion.p 
+                <m.p 
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5, duration: 0.6 }}
                   className="text-base md:text-lg text-white/80 mb-6 max-w-xl leading-relaxed font-light"
                 >
                   {slides[current].description}
-                </motion.p>
+                </m.p>
 
-                <motion.div 
+                <m.div 
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6, duration: 0.6 }}
@@ -156,15 +156,15 @@ export function HeroCarousel() {
                     <PlayCircle className="mr-2 w-5 h-5 group-hover:scale-110 transition-transform text-saffron" /> 
                     {slides[current].secondaryCTA}
                   </Button>
-                </motion.div>
-              </motion.div>
+                </m.div>
+              </m.div>
             </AnimatePresence>
           </div>
 
           {/* Interactive Right Side - Floating Cards */}
           <div className="hidden lg:block lg:col-span-4 xl:col-span-5 relative h-[320px]">
              <AnimatePresence mode="wait">
-               <motion.div
+               <m.div
                   key={`badge-${current}`}
                   initial={{ opacity: 0, scale: 0.8, x: 40 }}
                   animate={{ opacity: 1, scale: 1, x: 0 }}
@@ -172,7 +172,7 @@ export function HeroCarousel() {
                   transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.2 }}
                   className="absolute right-0 top-1/2 -translate-y-1/2"
                >
-                  <div className="bg-white/10 backdrop-blur-xl border border-white/20 p-6 rounded-3xl shadow-2xl w-72 transform hover:-translate-y-2 hover:shadow-saffron/20 transition-all duration-300 group">
+                  <div className="bg-white/10 backdrop-blur-xl border border-white/20 p-6 rounded-3xl shadow-2xl w-72 transform hover:-translate-y-2 hover:shadow-saffron/20 transition duration-300 group">
                     <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-saffron to-yellow-500 flex items-center justify-center mb-4 shadow-lg shadow-saffron/30 group-hover:scale-110 transition-transform">
                       {React.createElement(slides[current].badgeIcon, { className: "w-6 h-6 text-white" })}
                     </div>
@@ -184,11 +184,11 @@ export function HeroCarousel() {
                       <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </div>
                   </div>
-               </motion.div>
+               </m.div>
              </AnimatePresence>
 
              {/* Decorative element behind the card */}
-             <motion.div
+             <m.div
                 animate={{ 
                   rotate: [0, 360],
                   scale: [1, 1.1, 1]
@@ -206,17 +206,19 @@ export function HeroCarousel() {
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             {/* Progress Bars */}
             <div className="flex gap-4 flex-1 max-w-lg">
-              {slides.map((_, idx) => (
-                <div 
-                  key={idx}
+              {slides.map((slide, idx) => (
+                <button
+                  type="button"
+                  key={slide.id}
+                  aria-label={`Go to slide ${idx + 1}`}
                   className="h-1.5 flex-1 bg-white/20 rounded-full overflow-hidden cursor-pointer relative group"
                   onClick={() => setCurrent(idx)}
                 >
                   {current === idx && (
-                    <motion.div
-                      className="absolute inset-y-0 left-0 bg-saffron"
-                      initial={{ width: "0%" }}
-                      animate={{ width: "100%" }}
+                    <m.div
+                      className="absolute inset-y-0 left-0 bg-saffron origin-left w-full"
+                      initial={{ scaleX: 0 }}
+                      animate={{ scaleX: 1 }}
                       transition={{ 
                         duration: isHovered ? 0 : 6, 
                         ease: "linear" 
@@ -227,21 +229,25 @@ export function HeroCarousel() {
                   
                   {/* Hover effect for inactive bars */}
                   <div className="absolute inset-0 bg-white/40 opacity-0 group-hover:opacity-100 transition-opacity" />
-                </div>
+                </button>
               ))}
             </div>
 
             {/* Arrows */}
             <div className="flex items-center gap-3 hidden md:flex">
               <button 
+                type="button"
+                aria-label="Previous slide"
                 onClick={prevSlide}
-                className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-navy transition-all hover:scale-110 backdrop-blur-md"
+                className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-navy transition hover:scale-110 backdrop-blur-md"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
               <button 
+                type="button"
+                aria-label="Next slide"
                 onClick={nextSlide}
-                className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-navy transition-all hover:scale-110 backdrop-blur-md"
+                className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-navy transition hover:scale-110 backdrop-blur-md"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>

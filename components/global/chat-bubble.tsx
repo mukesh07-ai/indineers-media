@@ -37,12 +37,6 @@ export function ChatBubble() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
   }
 
-  React.useEffect(() => {
-    if (isOpen) {
-      scrollToBottom()
-    }
-  }, [messages, isOpen, isTyping])
-
   const handleSend = (e?: React.FormEvent) => {
     if (e) e.preventDefault()
     if (!inputValue.trim()) return
@@ -56,6 +50,7 @@ export function ChatBubble() {
     setMessages((prev) => [...prev, newMessage])
     setInputValue("")
     setIsTyping(true)
+    setTimeout(scrollToBottom, 50)
 
     // Simulate auto-reply delay
     setTimeout(() => {
@@ -65,6 +60,7 @@ export function ChatBubble() {
         { id: Date.now() + 1, text: randomReply, isUser: false },
       ])
       setIsTyping(false)
+      setTimeout(scrollToBottom, 50)
     }, 1500 + Math.random() * 1000)
   }
 
@@ -78,7 +74,7 @@ export function ChatBubble() {
               <h4 className="font-bold">IMPL Support</h4>
               <p className="text-white/70 text-xs mt-0.5">We typically reply in a few minutes.</p>
             </div>
-            <button onClick={() => setIsOpen(false)} className="text-white/70 hover:text-white transition-colors">
+            <button type="button" aria-label="Close Chat" onClick={() => setIsOpen(false)} className="text-white/70 hover:text-white transition-colors">
               <X className="w-5 h-5" />
             </button>
           </div>
@@ -110,7 +106,9 @@ export function ChatBubble() {
 
           {/* Input Area */}
           <form onSubmit={handleSend} className="border-t border-black/5 dark:border-white/10 p-3 bg-white/50 dark:bg-slate-800/50 flex gap-2 shrink-0">
+            <label htmlFor="chat-message" className="sr-only">Type a message</label>
             <input 
+              id="chat-message"
               type="text" 
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
@@ -119,6 +117,7 @@ export function ChatBubble() {
             />
             <button 
               type="submit"
+              aria-label="Send Message"
               disabled={!inputValue.trim()}
               className="w-10 h-10 bg-saffron text-white rounded-full flex items-center justify-center shrink-0 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-saffron/90 transition-colors"
             >
@@ -128,9 +127,15 @@ export function ChatBubble() {
         </div>
       )}
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        type="button"
+        onClick={() => {
+          setIsOpen(!isOpen)
+          if (!isOpen) {
+            setTimeout(scrollToBottom, 50)
+          }
+        }}
         className={cn(
-          "w-14 h-14 bg-saffron text-white rounded-full flex items-center justify-center shadow-lg transition-all hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-saffron",
+          "w-14 h-14 bg-saffron text-white rounded-full flex items-center justify-center shadow-lg transition-transform transition-colors hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-saffron",
           isOpen && "bg-navy scale-95 hover:scale-100"
         )}
         aria-label="Toggle Support Chat"

@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useMemo } from "react"
 import { useRouter } from "next/navigation"
 import India from "@svg-maps/india"
-import { motion, AnimatePresence } from "framer-motion"
+import { m, AnimatePresence } from "framer-motion"
 import { cn } from "@/lib/utils"
 
 // Mock data representing states where Indianeers Media has worked.
@@ -30,6 +30,7 @@ export function InteractiveIndiaMap({ className, variant = 'default' }: Interact
   const mapRef = React.useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsClient(true)
     
     // Handle click outside to close tooltip
@@ -107,7 +108,7 @@ export function InteractiveIndiaMap({ className, variant = 'default' }: Interact
           const isActive = activeState === location.id
 
           return (
-            <motion.path
+            <m.path
               key={location.id}
               id={location.id}
               name={location.name}
@@ -142,10 +143,9 @@ export function InteractiveIndiaMap({ className, variant = 'default' }: Interact
         })}
       </svg>
 
-      {isClient && (
-        <AnimatePresence>
-          {activeState && STATE_DATA[activeState] && (
-            <motion.div
+      <AnimatePresence>
+        {isClient && activeState && STATE_DATA[activeState] && (
+          <m.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
@@ -155,7 +155,7 @@ export function InteractiveIndiaMap({ className, variant = 'default' }: Interact
             >
               <div className="absolute inset-0 bg-gradient-to-br from-black/5 dark:from-white/10 to-transparent pointer-events-none" />
               
-              <motion.div 
+              <m.div 
                 className="relative"
                 initial="hidden"
                 animate="visible"
@@ -168,7 +168,7 @@ export function InteractiveIndiaMap({ className, variant = 'default' }: Interact
                   }
                 }}
               >
-                <motion.div 
+                <m.div 
                   className="flex items-center gap-2 mb-3 border-b border-black/10 dark:border-white/10 pb-2"
                   variants={{
                     hidden: { opacity: 0, y: 5 },
@@ -179,9 +179,9 @@ export function InteractiveIndiaMap({ className, variant = 'default' }: Interact
                   <h4 className="font-bold text-navy dark:text-white text-[13px] tracking-wider uppercase drop-shadow-sm">
                     {STATE_DATA[activeState].name}
                   </h4>
-                </motion.div>
+                </m.div>
                 
-                <motion.div 
+                <m.div 
                   className="flex flex-col gap-2.5 mb-4 pointer-events-none"
                   variants={{
                     hidden: { opacity: 0, y: 5 },
@@ -206,9 +206,10 @@ export function InteractiveIndiaMap({ className, variant = 'default' }: Interact
                       {STATE_DATA[activeState].candidates.toLocaleString()}
                     </span>
                   </div>
-                </motion.div>
+                </m.div>
                 
-                <motion.button 
+                <m.button 
+                  type="button"
                   onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                     e.stopPropagation()
                     handlePopupClick(activeState)
@@ -217,15 +218,14 @@ export function InteractiveIndiaMap({ className, variant = 'default' }: Interact
                     hidden: { opacity: 0, y: 5 },
                     visible: { opacity: 1, y: 0, transition: { duration: 0.3, ease: "easeOut" } }
                   }}
-                  className="w-full bg-saffron hover:brightness-110 transition-all active:scale-95 text-white text-[10px] font-bold uppercase tracking-widest py-2 rounded-lg cursor-pointer flex justify-center items-center gap-1 shadow-lg hover:shadow-saffron/40"
+                  className="w-full bg-saffron hover:brightness-110 transition active:scale-95 text-white text-[10px] font-bold uppercase tracking-widest py-2 rounded-lg cursor-pointer flex justify-center items-center gap-1 shadow-lg hover:shadow-saffron/40"
                 >
                   View Projects <span className="text-sm leading-none ml-0.5">→</span>
-                </motion.button>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      )}
+                </m.button>
+              </m.div>
+          </m.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }

@@ -72,6 +72,8 @@ export function ContactSection() {
             <div className="w-full h-[350px] rounded-2xl overflow-hidden shadow-lg border border-black/5 dark:border-white/10 group relative">
               <div className="absolute inset-0 bg-navy/20 dark:bg-black/40 group-hover:bg-transparent transition-colors duration-500 pointer-events-none z-10" />
               <iframe
+                title="Office Location Map"
+                sandbox="allow-scripts allow-popups"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3666.273187217997!2d77.43323017608226!3d23.23077397902847!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x397c4269e8555555%3A0x6b6960d754b52b21!2sArera%20Colony%2C%20Bhopal%2C%20Madhya%20Pradesh!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
                 width="100%"
                 height="100%"
@@ -79,7 +81,7 @@ export function ContactSection() {
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                className="grayscale-[30%] group-hover:grayscale-0 transition-all duration-500"
+                className="grayscale-[30%] group-hover:grayscale-0 transition duration-500"
               ></iframe>
             </div>
           </div>
@@ -87,26 +89,26 @@ export function ContactSection() {
           {/* Right: Contact Form */}
           <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl p-8 rounded-3xl shadow-[0_8px_32px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.5)] border border-black/5 dark:border-white/10">
             <h3 className="text-2xl font-bold mb-2 text-navy dark:text-white">Send us a message</h3>
-            <p className="text-slate-600 dark:text-slate-400 text-sm mb-8">We would love to hear from you. Fill out the form below and we'll get back to you shortly.</p>
+            <p className="text-slate-600 dark:text-slate-400 text-sm mb-8">We would love to hear from you. Fill out the form below and we&apos;ll get back to you shortly.</p>
             
-            <form className="space-y-5" onSubmit={(e) => { e.preventDefault(); alert("Form submitted!") }}>
+            <form className="space-y-5" action={() => alert("Form submitted!")}>
               <div className="grid sm:grid-cols-2 gap-5">
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-slate-700 dark:text-slate-300">First Name</label>
-                  <input type="text" required className="w-full bg-slate-50 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-saffron/50 transition-all text-slate-800 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-600" placeholder="John" />
+                  <label htmlFor="firstName" className="text-sm font-medium text-slate-700 dark:text-slate-300">First Name</label>
+                  <input id="firstName" type="text" required className="w-full bg-slate-50 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-saffron/50 transition text-slate-800 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-600" placeholder="John" />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Last Name</label>
-                  <input type="text" required className="w-full bg-slate-50 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-saffron/50 transition-all text-slate-800 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-600" placeholder="Doe" />
+                  <label htmlFor="lastName" className="text-sm font-medium text-slate-700 dark:text-slate-300">Last Name</label>
+                  <input id="lastName" type="text" required className="w-full bg-slate-50 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-saffron/50 transition text-slate-800 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-600" placeholder="Doe" />
                 </div>
               </div>
               <div className="space-y-2">
-                <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Email Address</label>
-                <input type="email" required className="w-full bg-slate-50 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-saffron/50 transition-all text-slate-800 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-600" placeholder="john@example.com" />
+                <label htmlFor="email" className="text-sm font-medium text-slate-700 dark:text-slate-300">Email Address</label>
+                <input id="email" type="email" required className="w-full bg-slate-50 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-saffron/50 transition text-slate-800 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-600" placeholder="john@example.com" />
               </div>
               <div className="space-y-2">
-                <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Subject</label>
-                <select className="w-full bg-slate-50 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-saffron/50 transition-all text-slate-800 dark:text-white appearance-none cursor-pointer">
+                <label htmlFor="subject" className="text-sm font-medium text-slate-700 dark:text-slate-300">Subject</label>
+                <select id="subject" className="w-full bg-slate-50 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-saffron/50 transition text-slate-800 dark:text-white appearance-none cursor-pointer">
                   <option value="general">General Inquiry</option>
                   <option value="training">Training Programs</option>
                   <option value="partnership">Partnership Opportunity</option>
@@ -114,10 +116,10 @@ export function ContactSection() {
                 </select>
               </div>
               <div className="space-y-2">
-                <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Message</label>
-                <textarea rows={4} required className="w-full bg-slate-50 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-saffron/50 transition-all text-slate-800 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-600 resize-none" placeholder="How can we help you?"></textarea>
+                <label htmlFor="message" className="text-sm font-medium text-slate-700 dark:text-slate-300">Message</label>
+                <textarea id="message" rows={4} required className="w-full bg-slate-50 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-saffron/50 transition text-slate-800 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-600 resize-none" placeholder="How can we help you?"></textarea>
               </div>
-              <Button type="submit" className="w-full h-14 bg-saffron hover:bg-saffron/90 text-white rounded-xl font-semibold shadow-lg shadow-saffron/20 transition-all hover:scale-[1.02] text-lg mt-2">
+              <Button type="submit" className="w-full h-14 bg-saffron hover:bg-saffron/90 text-white rounded-xl font-semibold shadow-lg shadow-saffron/20 transition hover:scale-[1.02] text-lg mt-2">
                 Send Message
               </Button>
             </form>

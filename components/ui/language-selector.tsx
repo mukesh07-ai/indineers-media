@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { m, AnimatePresence } from "framer-motion"
 import { Globe, ChevronDown, Check } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -32,6 +32,7 @@ export function LanguageSelector({ className, placement = "bottom" }: LanguageSe
       const val = match[2].split('/').pop();
       if (val) {
         const found = LANGUAGES.find(l => l.code === val);
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         if (found) setSelectedLang(found);
       }
     }
@@ -54,9 +55,10 @@ export function LanguageSelector({ className, placement = "bottom" }: LanguageSe
   return (
     <div className={cn("relative", className)} ref={dropdownRef}>
       <button
+        type="button"
         onClick={() => setIsOpen(!isOpen)}
         className={cn(
-          "flex items-center gap-2 px-3 py-2 rounded-full transition-all duration-300 outline-none group border",
+          "flex items-center gap-2 px-3 py-2 rounded-full transition duration-300 outline-none group border",
           isOpen 
             ? "bg-white/20 dark:bg-slate-800/80 border-white/40 dark:border-white/10 shadow-inner backdrop-blur-md" 
             : "bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 border-transparent hover:border-black/10 dark:hover:border-white/10"
@@ -75,7 +77,7 @@ export function LanguageSelector({ className, placement = "bottom" }: LanguageSe
 
       <AnimatePresence>
         {isOpen && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: placement === "bottom" ? -10 : 10, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: placement === "bottom" ? -10 : 10, scale: 0.95 }}
@@ -90,6 +92,7 @@ export function LanguageSelector({ className, placement = "bottom" }: LanguageSe
                 const isSelected = selectedLang.code === lang.code
                 return (
                   <button
+                    type="button"
                     key={lang.code}
                     onClick={() => {
                       setSelectedLang(lang)
@@ -102,7 +105,7 @@ export function LanguageSelector({ className, placement = "bottom" }: LanguageSe
                       }
                     }}
                     className={cn(
-                      "flex items-center justify-between px-3 py-2 text-sm font-medium rounded-xl transition-all w-full text-left",
+                      "flex items-center justify-between px-3 py-2 text-sm font-medium rounded-xl transition-colors w-full text-left",
                       isSelected
                         ? "bg-saffron/10 text-saffron"
                         : "text-navy/70 dark:text-slate-300 hover:bg-black/5 dark:hover:bg-white/10 hover:text-navy dark:hover:text-slate-100"
@@ -114,7 +117,7 @@ export function LanguageSelector({ className, placement = "bottom" }: LanguageSe
                 )
               })}
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </div>

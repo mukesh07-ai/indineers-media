@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { motion, Variants } from "framer-motion"
+import { m, Variants } from "framer-motion"
 import { FaFacebook, FaInstagram, FaLinkedin, FaYoutube, FaMapMarkerAlt, FaPaperPlane } from "react-icons/fa"
 import { FaXTwitter } from "react-icons/fa6"
 import { InteractiveIndiaMap } from "@/components/ui/interactive-india-map"
@@ -31,7 +31,7 @@ const fadeUp: Variants = {
 const LinkItem = ({ href, children }: { href: string, children: React.ReactNode }) => (
   <li>
     <Link href={href} className="group flex items-center gap-2 text-slate-600 dark:text-white/70 hover:text-navy dark:hover:text-white transition-colors duration-300 w-fit">
-      <span className="h-px w-0 bg-saffron transition-all duration-300 group-hover:w-4" />
+      <span className="h-px w-0 bg-saffron transition-[width] duration-300 group-hover:w-4" />
       <span className="group-hover:translate-x-1 transition-transform duration-300">{children}</span>
     </Link>
   </li>
@@ -50,7 +50,7 @@ export function Footer() {
       <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 z-10">
         
         {/* Newsletter Bar */}
-        <motion.div 
+        <m.div 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -64,22 +64,24 @@ export function Footer() {
               <h3 className="text-xl md:text-2xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-navy to-navy/70 dark:from-white dark:to-white/70">Stay Updated</h3>
               <p className="text-slate-600 dark:text-white/60 mt-1 text-sm md:text-base">Join our newsletter for the latest on our skilling initiatives.</p>
             </div>
-            <form className="flex w-full md:w-auto relative" onSubmit={(e) => { e.preventDefault(); alert("Mock Submit") }}>
+            <form className="flex w-full md:w-auto relative" action={() => alert("Mock Submit")}>
+              <label htmlFor="newsletter-email" className="sr-only">Email address</label>
               <input 
+                id="newsletter-email"
                 type="email" 
                 placeholder="Enter your email address" 
                 required
-                className="w-full md:w-[320px] bg-white dark:bg-black/20 backdrop-blur-md border border-black/10 dark:border-white/10 text-slate-800 dark:text-white pl-5 pr-[110px] py-3 rounded-full focus:outline-none focus:ring-2 focus:ring-saffron/50 focus:border-saffron/50 transition-all placeholder:text-slate-400 dark:placeholder:text-white/40 shadow-inner text-sm"
+                className="w-full md:w-[320px] bg-white dark:bg-black/20 backdrop-blur-md border border-black/10 dark:border-white/10 text-slate-800 dark:text-white pl-5 pr-[110px] py-3 rounded-full focus:outline-none focus:ring-2 focus:ring-saffron/50 focus:border-saffron/50 transition placeholder:text-slate-400 dark:placeholder:text-white/40 shadow-inner text-sm"
               />
-              <button type="submit" className="absolute right-1.5 top-1.5 bottom-1.5 bg-saffron hover:bg-saffron/90 text-white px-4 rounded-full font-semibold transition-all hover:scale-105 active:scale-95 flex items-center gap-2 shadow-md shadow-saffron/20 text-sm">
+              <button type="submit" className="absolute right-1.5 top-1.5 bottom-1.5 bg-saffron hover:bg-saffron/90 text-white px-4 rounded-full font-semibold transition hover:scale-105 active:scale-95 flex items-center gap-2 shadow-md shadow-saffron/20 text-sm">
                 Subscribe <FaPaperPlane className="text-xs" />
               </button>
             </form>
           </div>
-        </motion.div>
+        </m.div>
 
         {/* Main Footer Content */}
-        <motion.div 
+        <m.div 
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
@@ -89,7 +91,7 @@ export function Footer() {
           {/* Links Section */}
           <div className="w-full lg:w-[75%] grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
             
-            <motion.div variants={fadeUp}>
+            <m.div variants={fadeUp}>
               <h4 className="font-bold text-lg mb-6 text-navy dark:text-white tracking-wider flex items-center gap-3">
                 <span className="w-2 h-2 rounded-full bg-saffron shadow-[0_0_10px_rgba(255,153,51,0.8)]" />
                 ABOUT
@@ -103,9 +105,9 @@ export function Footer() {
                 <LinkItem href="/careers">Careers</LinkItem>
                 <LinkItem href="/contact">Contact Us</LinkItem>
               </ul>
-            </motion.div>
+            </m.div>
             
-            <motion.div variants={fadeUp}>
+            <m.div variants={fadeUp}>
               <h4 className="font-bold text-lg mb-6 text-navy dark:text-white tracking-wider flex items-center gap-3">
                 <span className="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.8)]" />
                 WHAT WE DO
@@ -119,9 +121,9 @@ export function Footer() {
                 <LinkItem href="/what-we-do#assessment">Assessments & Certs</LinkItem>
                 <LinkItem href="/what-we-do#placement">Placement Support</LinkItem>
               </ul>
-            </motion.div>
+            </m.div>
 
-            <motion.div variants={fadeUp}>
+            <m.div variants={fadeUp}>
               <h4 className="font-bold text-lg mb-6 text-navy dark:text-white tracking-wider flex items-center gap-3">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.8)]" />
                 PROJECTS
@@ -139,9 +141,9 @@ export function Footer() {
                   </Link>
                 </li>
               </ul>
-            </motion.div>
+            </m.div>
 
-            <motion.div variants={fadeUp}>
+            <m.div variants={fadeUp}>
               <h4 className="font-bold text-lg mb-6 text-navy dark:text-white tracking-wider flex items-center gap-3">
                 <span className="w-2 h-2 rounded-full bg-purple-500 shadow-[0_0_10px_rgba(168,85,247,0.8)]" />
                 REACH US
@@ -160,11 +162,11 @@ export function Footer() {
                   <p className="pl-6 text-sm leading-relaxed">E-4/230, Arera Colony, Bhopal<br/>Madhya Pradesh 462016</p>
                 </div>
               </address>
-            </motion.div>
+            </m.div>
           </div>
 
           {/* Map Section */}
-          <motion.div variants={fadeUp} className="w-full lg:w-[25%] flex flex-col items-start lg:items-center xl:items-end">
+          <m.div variants={fadeUp} className="w-full lg:w-[25%] flex flex-col items-start lg:items-center xl:items-end">
             <div className="w-full max-w-[220px]">
               <h4 className="font-bold text-lg mb-6 text-navy dark:text-white tracking-wider flex items-center gap-3 w-full text-left">
                 <span className="w-2 h-2 rounded-full bg-saffron shadow-[0_0_10px_rgba(255,153,51,0.8)]" />
@@ -174,11 +176,11 @@ export function Footer() {
                 <InteractiveIndiaMap variant="minimal" />
               </div>
             </div>
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
 
         {/* Bottom Bar */}
-        <motion.div 
+        <m.div 
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -191,19 +193,19 @@ export function Footer() {
             </p>
             
             <div className="flex items-center gap-6 justify-center flex-1">
-              <Link href="https://www.instagram.com/indianeersmedia/?hl=en" target="_blank" className="text-slate-400 dark:text-white/40 hover:text-saffron hover:-translate-y-1 transition-all duration-300">
+              <Link href="https://www.instagram.com/indianeersmedia/?hl=en" target="_blank" className="text-slate-400 dark:text-white/40 hover:text-saffron hover:-translate-y-1 transition duration-300">
                 <FaInstagram className="w-5 h-5" />
               </Link>
-              <Link href="https://www.linkedin.com/company/indianeersmedia/?originalSubdomain=in" target="_blank" className="text-slate-400 dark:text-white/40 hover:text-blue-500 hover:-translate-y-1 transition-all duration-300">
+              <Link href="https://www.linkedin.com/company/indianeersmedia/?originalSubdomain=in" target="_blank" className="text-slate-400 dark:text-white/40 hover:text-blue-500 hover:-translate-y-1 transition duration-300">
                 <FaLinkedin className="w-5 h-5" />
               </Link>
-              <Link href="https://www.youtube.com/@indianeersmedia" target="_blank" className="text-slate-400 dark:text-white/40 hover:text-red-500 hover:-translate-y-1 transition-all duration-300">
+              <Link href="https://www.youtube.com/@indianeersmedia" target="_blank" className="text-slate-400 dark:text-white/40 hover:text-red-500 hover:-translate-y-1 transition duration-300">
                 <FaYoutube className="w-5 h-5" />
               </Link>
-              <Link href="https://www.facebook.com/indianeers" target="_blank" className="text-slate-400 dark:text-white/40 hover:text-blue-600 hover:-translate-y-1 transition-all duration-300">
+              <Link href="https://www.facebook.com/indianeers" target="_blank" className="text-slate-400 dark:text-white/40 hover:text-blue-600 hover:-translate-y-1 transition duration-300">
                 <FaFacebook className="w-5 h-5" />
               </Link>
-              <Link href="https://x.com/Indianeers" target="_blank" className="text-slate-400 dark:text-white/40 hover:text-navy dark:hover:text-white hover:-translate-y-1 transition-all duration-300">
+              <Link href="https://x.com/Indianeers" target="_blank" className="text-slate-400 dark:text-white/40 hover:text-navy dark:hover:text-white hover:-translate-y-1 transition duration-300">
                 <FaXTwitter className="w-5 h-5" />
               </Link>
             </div>
@@ -218,7 +220,7 @@ export function Footer() {
           <p className="text-slate-500 dark:text-white/50 text-xs font-medium text-center w-full mt-2 md:pr-20">
             Designed and Developed by <Link href="https://tricodx.com/" target="_blank" className="text-saffron hover:underline font-semibold hover:text-saffron/80 transition-colors">TricodX</Link>
           </p>
-        </motion.div>
+        </m.div>
 
       </div>
     </footer>

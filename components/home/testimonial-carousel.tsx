@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { m, AnimatePresence } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
@@ -57,7 +57,7 @@ export function TestimonialCarousel() {
     >
       <div className="overflow-hidden relative min-h-[400px] sm:min-h-[300px] flex items-center">
         <AnimatePresence mode="wait">
-          <motion.div
+          <m.div
             key={currentIndex}
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -81,7 +81,7 @@ export function TestimonialCarousel() {
                   
                   <div className="flex-1">
                     <p className="text-ink/80 dark:text-slate-300 text-xl md:text-2xl mb-8 italic leading-relaxed font-medium">
-                      "{TESTIMONIALS[currentIndex].text}"
+                      &quot;{TESTIMONIALS[currentIndex].text}&quot;
                     </p>
                     
                     <div>
@@ -92,13 +92,15 @@ export function TestimonialCarousel() {
                 </div>
               </CardContent>
             </Card>
-          </motion.div>
+          </m.div>
         </AnimatePresence>
       </div>
 
       {/* Navigation Controls */}
       <div className="flex items-center justify-center gap-4 mt-8">
         <button 
+          type="button"
+          aria-label="Previous testimonial"
           onClick={prev}
           className="w-10 h-10 rounded-full border border-black/10 dark:border-white/20 flex items-center justify-center text-navy dark:text-slate-300 hover:bg-navy hover:text-white dark:hover:bg-white dark:hover:text-navy transition-colors"
         >
@@ -106,11 +108,13 @@ export function TestimonialCarousel() {
         </button>
         
         <div className="flex gap-2">
-          {TESTIMONIALS.map((_, idx) => (
+          {TESTIMONIALS.map((testimonial, idx) => (
             <button 
-              key={idx}
+              type="button"
+              aria-label={`Go to testimonial ${idx + 1}`}
+              key={testimonial.name}
               onClick={() => setCurrentIndex(idx)}
-              className={`h-2 rounded-full transition-all duration-300 ${
+              className={`h-2 rounded-full transition-[width] transition-colors duration-300 ${
                 idx === currentIndex ? "w-8 bg-saffron" : "w-2 bg-black/10 dark:bg-white/20 hover:bg-black/20 dark:hover:bg-white/40"
               }`}
             />
@@ -118,6 +122,8 @@ export function TestimonialCarousel() {
         </div>
 
         <button 
+          type="button"
+          aria-label="Next testimonial"
           onClick={next}
           className="w-10 h-10 rounded-full border border-black/10 dark:border-white/20 flex items-center justify-center text-navy dark:text-slate-300 hover:bg-navy hover:text-white dark:hover:bg-white dark:hover:text-navy transition-colors"
         >

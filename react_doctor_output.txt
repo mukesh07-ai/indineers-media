@@ -1,0 +1,411 @@
+React Doctor v0.9.1
+
+  
+
+  ⚠ Bugs: Array index used as a key ×6
+    Learn more: https://react.doctor/docs/rules/react-doctor/no-array-index-as-key
+    Your users can see & submit the wrong data when this list
+    reorders or filters, so use a stable id like
+    `key={item.id}`, not the array index "i".
+    → Use a stable id from the item, like `key={item.id}` or
+    `key={item.slug}`. Index keys break when the list reorders
+    or filters.
+
+    app/page.tsx:57
+
+    app/page.tsx:119
+
+    app/page.tsx:165
+
+    components/home/faq-section.tsx:86
+
+    components/home/hero-carousel.tsx:210
+
+    components/home/testimonial-carousel.tsx:111
+
+  ⚠ Security: iframe missing sandbox attribute
+    Learn more: https://react.doctor/docs/rules/react-doctor/iframe-missing-sandbox
+    An `<iframe>` with no `sandbox` is a security hole: the
+    embedded page gets full access to your site.
+    → Add `sandbox=""` or a curated value so embedded pages
+    cannot get full access to your site by default.
+
+    components/home/contact-section.tsx:74
+
+  ⚠ Accessibility: Label missing associated control ×5
+    Learn more: https://react.doctor/docs/rules/react-doctor/label-has-associated-control
+    Screen reader users can't tell which input this label names
+    because it's tied to none, so add `htmlFor` or wrap the
+    input inside it.
+    → Tie every label to a control with `htmlFor`, or by
+    nesting the input.
+
+    components/home/contact-section.tsx:95
+
+    components/home/contact-section.tsx:99
+
+    components/home/contact-section.tsx:104
+
+    components/home/contact-section.tsx:108
+
+    components/home/contact-section.tsx:117
+
+  ⚠ Accessibility: iframe missing title
+    Learn more: https://react.doctor/docs/rules/react-doctor/iframe-has-title
+    Screen reader users cannot identify this `<iframe>` because
+    it has no title. Add a `title` that describes its content.
+    → Add a descriptive `title` so screen reader users know
+    what the embedded frame contains.
+
+    components/home/contact-section.tsx:74
+
+  ⚠ Performance: Unstable context provider value
+    Learn more: https://react.doctor/docs/rules/react-doctor/jsx-no-constructed-context-values
+    Every reader of this context redraws on each render because
+    you build its `value` inline.
+    → Wrap the context value in `useMemo` or move it outside
+    the component so consumers do not redraw every render.
+
+    components/ui/tabs.tsx:16
+
+  ⚠ Accessibility: Control missing accessible label ×9
+    Learn more: https://react.doctor/docs/rules/react-doctor/control-has-associated-label
+    Blind users can't tell what this control does because
+    screen readers find no label, so add visible text,
+    `aria-label`, or `aria-labelledby`.
+    → Give every interactive control a label screen readers can
+    read.
+
+    components/global/chat-bubble.tsx:81
+
+    components/global/chat-bubble.tsx:120
+
+    components/global/header.tsx:190
+
+    components/home/contact-section.tsx:109
+
+    components/home/hero-carousel.tsx:235
+
+    components/home/hero-carousel.tsx:241
+
+    components/home/testimonial-carousel.tsx:101
+
+    components/home/testimonial-carousel.tsx:110
+
+    components/home/testimonial-carousel.tsx:120
+
+  ⚠ Bugs: Plain anchor reloads internal Next.js links
+    Learn more: https://react.doctor/docs/rules/react-doctor/nextjs-no-a-element
+    Plain <a> reloads the whole page for internal links, so
+    Next.js loses client-side navigation and prefetching.
+    → `import Link from 'next/link'` for client-side
+    navigation, prefetching, and preserved scroll position
+
+    components/home/faq-section.tsx:64
+
+  ⚠ Bugs: Effect re-subscribes on a changing callback
+    Learn more: https://react.doctor/docs/rules/react-doctor/prefer-use-effect-event
+    Your effect re-subscribes whenever "onClose" changes, even
+    though it's only used inside `addEventListener`.
+    → Wrap the callback with `useEffectEvent(callback)` (React
+    19.2+) and call it inside the sub-handler. An Effect Event
+    always sees the latest props and state but isn't a
+    dependency, so the effect won't re-subscribe every time the
+    parent redraws. See
+    https://react.dev/reference/react/useEffectEvent
+
+    components/ui/modal.tsx:30
+
+  ⚠ Bugs: next/image fill image is missing sizes ×4
+    Learn more: https://react.doctor/docs/rules/react-doctor/nextjs-image-missing-sizes
+    next/image uses fill without sizes, so your users download
+    the largest image.
+    → Add `sizes` matching your layout so `next/image` does not
+    assume the largest candidate and make users download
+    oversized images.
+
+    app/page.tsx:72
+
+    app/page.tsx:210
+
+    components/home/hero-carousel.tsx:87
+
+    components/home/project-card.tsx:45
+
+  ⚠ Bugs: preventDefault on a form or link ×2
+    Learn more: https://react.doctor/docs/rules/react-doctor/no-prevent-default
+    Your users can't submit this <form> without JavaScript
+    because onSubmit calls preventDefault(), so use a server
+    action like `<form action={serverAction}>` to make it work
+    either way.
+    → Use `<form action>` where your framework supports it (it
+    works without JS), or use a `<button>` instead of an `<a>`
+    with preventDefault.
+
+    components/global/footer.tsx:67
+
+    components/home/contact-section.tsx:92
+
+  ⚠ Performance: Full Framer Motion import ×7
+    Learn more: https://react.doctor/docs/rules/react-doctor/use-lazy-motion
+    Importing "motion" ships about 30 kb of extra code and
+    slows page load. Use "m" with LazyMotion instead.
+    → Use `import { LazyMotion, m } from "framer-motion"` with
+    `domAnimation` features. Saves about 30kb.
+
+    components/global/footer.tsx:5
+
+    components/global/header.tsx:9
+
+    components/home/faq-section.tsx:4
+
+    components/home/hero-carousel.tsx:6
+
+    components/home/testimonial-carousel.tsx:4
+
+    components/ui/interactive-india-map.tsx:6
+
+    components/ui/language-selector.tsx:4
+
+  ⚠ Accessibility: Interaction on static element ×2
+    Learn more: https://react.doctor/docs/rules/react-doctor/no-static-element-interactions
+    Screen reader users can't tell this click handler is
+    interactive because it has no `role`, so add a `role` or
+    use a button or link.
+    → Give clickable static elements a `role`, or use a button
+    or link.
+
+    components/home/hero-carousel.tsx:209
+
+    components/home/project-card.tsx:37
+
+  ⚠ Maintainability: deslop/unused-file ×3
+    Unused file is not reachable from any entry point, so it
+    adds maintenance surface without shipping any code.
+    → Delete the file if it is truly unreachable, or import it
+    from an entry point.
+
+    components/ui/badge.tsx
+
+    components/ui/modal.tsx
+
+    components/ui/tabs.tsx
+
+  ⚠ Bugs: Button missing explicit type ×14
+    Learn more: https://react.doctor/docs/rules/react-doctor/button-has-type
+    Your users can submit the form by accident because a
+    `<button>` with no `type` defaults to submit.
+    → Set an explicit button `type` so plain buttons do not
+    submit forms by accident: `type="button"`, `"submit"`, or
+    `"reset"`.
+
+    components/global/chat-bubble.tsx:81
+
+    components/global/chat-bubble.tsx:130
+
+    components/global/header.tsx:110
+
+    components/global/header.tsx:159
+
+    components/global/header.tsx:190
+
+    components/home/faq-section.tsx:93
+
+    components/home/hero-carousel.tsx:235
+
+    components/home/hero-carousel.tsx:241
+
+    components/home/testimonial-carousel.tsx:101
+
+    components/home/testimonial-carousel.tsx:110
+
+    components/home/testimonial-carousel.tsx:120
+
+    components/ui/language-selector.tsx:57
+
+    components/ui/language-selector.tsx:93
+
+    components/ui/modal.tsx:51
+
+  ⚠ Bugs: Event logic handled in an effect
+    Learn more: https://react.doctor/docs/rules/react-doctor/no-event-handler
+    Faking an event handler with state plus a useEffect costs
+    an extra render & runs late.
+    → Run the side effect in the event handler that triggers
+    it, instead of watching its state from a useEffect. See
+    https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers
+
+    components/global/chat-bubble.tsx:40
+
+  ⚠ Accessibility: Click handler missing keyboard handler ×3
+    Learn more: https://react.doctor/docs/rules/react-doctor/click-events-have-key-events
+    Keyboard users can't trigger this click handler because
+    there's no keyboard one, so add `onKeyUp`, `onKeyDown`, or
+    `onKeyPress`.
+    → Pair `onClick` with a key handler so keyboard users can
+    trigger it.
+
+    components/global/header.tsx:174
+
+    components/home/hero-carousel.tsx:209
+
+    components/home/project-card.tsx:37
+
+  ⚠ Performance: useEffect setState flashes on mount
+    Learn more: https://react.doctor/docs/rules/react-doctor/rendering-hydration-no-flicker
+    `useEffect(setState, [])` runs after the first paint, so
+    users can see the initial state flash. Initialize from a
+    render-safe value or use `useSyncExternalStore` for
+    external values.
+    → Initialize state from a render-safe value before the
+    first paint, or read external mutable values with
+    `useSyncExternalStore`.
+
+    components/ui/theme-toggle.tsx:13
+
+  ⚠ Performance: transition: all animates everything ×27
+    Learn more: https://react.doctor/docs/rules/react-doctor/no-transition-all
+    Your users see janky animation because `transition-all`
+    animates every property that changes, including expensive
+    layout ones and instant ones like focus rings. Name the
+    properties: `transition-colors`, `transition-opacity`, or
+    `transition-transform`.
+    → List the specific properties: `transition: "opacity
+    200ms, transform 200ms"`. In Tailwind, use
+    `transition-colors`, `transition-opacity`, or
+    `transition-transform`
+
+    app/page.tsx:64
+
+    app/page.tsx:119
+
+    app/page.tsx:188
+
+    components/global/footer.tsx:34
+
+    components/global/footer.tsx:68
+
+    components/global/footer.tsx:74
+
+    components/global/footer.tsx:194-206
+
+    components/global/header.tsx:132
+
+    components/global/header.tsx:222
+
+    components/home/contact-section.tsx:74
+
+    components/home/contact-section.tsx:96
+
+    components/home/contact-section.tsx:100
+
+    components/home/contact-section.tsx:105
+
+    components/home/contact-section.tsx:109
+
+    components/home/contact-section.tsx:118-120
+
+    components/home/faq-section.tsx:64
+
+    components/home/hero-carousel.tsx:174
+
+    components/home/hero-carousel.tsx:235
+
+    components/home/hero-carousel.tsx:241
+
+    components/home/project-card.tsx:56
+
+    components/home/project-card.tsx:67
+
+    components/ui/interactive-india-map.tsx:211
+
+  ⚠ Accessibility: Custom modal instead of dialog
+    Learn more: https://react.doctor/docs/rules/react-doctor/prefer-html-dialog
+    Keyboard users can tab out of this `role="dialog"` modal
+    because it has no built-in focus trapping, so use the
+    native `<dialog>`, which gives you focus trapping, `Escape`
+    to close, and the backdrop for free.
+    → Replace the wrapper with `<dialog>` and open it with
+    `dialog.showModal()`. For the trigger, prefer `<button
+    commandfor="id" command="show-modal">` (Chrome 135+), or a
+    `useRef` with `dialogRef.current?.showModal()`.
+
+    components/ui/modal.tsx:43
+
+  ⚠ Accessibility: Tabindex on non-interactive element
+    Learn more: https://react.doctor/docs/rules/react-doctor/no-noninteractive-tabindex
+    Keyboard users get stuck focusing this element they can't
+    act on because `tabIndex` makes it tabbable, so remove it.
+    → Only add `tabIndex` to interactive elements or
+    interactive roles.
+
+    components/ui/tabs.tsx:56
+
+  ⚠ Maintainability: deslop/unused-dependency ×3
+    Unused dependency: `react-hook-form`
+    Unused dependency: `react-svg-map`
+    Unused dependency: `zod`
+    → An unused dependency adds install time and supply-chain
+    surface without being used; remove it from package.json if
+    it is genuinely unused.
+
+  ⚠ Accessibility: Field relies on placeholder text for its label ×6
+    Learn more: https://react.doctor/docs/rules/react-doctor/no-placeholder-only-field
+    Placeholder text disappears during entry and cannot replace
+    a persistent field label. Add a visible associated label.
+    → Add a visible label associated with the field. Keep
+    placeholder text for examples or formatting hints.
+
+    components/global/chat-bubble.tsx:113
+
+    components/global/footer.tsx:68
+
+    components/home/contact-section.tsx:96
+
+    components/home/contact-section.tsx:100
+
+    components/home/contact-section.tsx:105
+
+    components/home/contact-section.tsx:118
+
+  ⚠ Accessibility: Dialog without accessible name
+    Learn more: https://react.doctor/docs/rules/react-doctor/dialog-has-accessible-name
+    This dialog has no accessible name, so screen readers
+    announce it as just “dialog.” Add `aria-label` or point
+    `aria-labelledby` at its heading.
+    → Give every `<dialog>` / `role="dialog"` an accessible
+    name with `aria-label` or `aria-labelledby` (referencing
+    the dialog's title element).
+
+    components/ui/modal.tsx:42
+
+
+  ────────────────────────────────────────────────────────────
+
+  All 101 issues
+
+  Security › 1 warning
+  Bugs › 29 warnings
+  Performance › 36 warnings
+  Accessibility › 29 warnings
+  Maintainability › 6 warnings
+
+  ┌─────┐  46 / 100 Critical
+  │ x x │  ███████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░
+  │  ▽  │  React Doctor (https://react.doctor)
+  └─────┘
+
+  Full diagnostics written to /var/folders/jb/g9mfskqj4pg05qln09fmdkxr0000gn/T/react-doctor-ee18e2d3-7af2-4e86-9bc0-d4c7bd592a32
+
+  ────────────────────────────────────────────────────────────
+
+  Share: https://react.doctor/share?p=app_tmp&s=46&w=101&f=16
+  Tell others how you did on socials
+
+  Docs: https://react.doctor/docs
+  Learn more about fixing issues, setting up CI/CD, and
+  configuring rules with a config file
+
+  GitHub: https://github.com/millionco/react-doctor
+  Report issues and star the repository!
+

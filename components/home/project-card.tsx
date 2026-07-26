@@ -40,12 +40,17 @@ export function ProjectCard({ project }: ProjectCardProps) {
       onMouseEnter={() => setIsActive(true)}
       onMouseLeave={() => setIsActive(false)}
       onClick={() => setIsActive(!isActive)}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setIsActive(!isActive); } }}
+      role="button"
+      tabIndex={0}
+      aria-label={`View project ${project.title}`}
       data-active={isActive}
     >
       <Image 
         src={project.img} 
         alt={project.title} 
         fill 
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         className="object-cover transition-transform duration-700 group-hover:scale-110 group-data-[active=true]:scale-110" 
       />
       
@@ -53,7 +58,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
       <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/40 to-transparent group-hover:bg-navy/80 group-data-[active=true]:bg-navy/80 transition-colors duration-500 backdrop-blur-[2px] group-hover:backdrop-blur-sm group-data-[active=true]:backdrop-blur-sm opacity-100" />
       
       {/* Default State (Fades out on hover or active) */}
-      <div className="absolute inset-0 flex flex-col justify-end p-8 transition-all duration-500 group-hover:opacity-0 group-data-[active=true]:opacity-0 group-hover:translate-y-8 group-data-[active=true]:translate-y-8">
+      <div className="absolute inset-0 flex flex-col justify-end p-8 transition duration-500 group-hover:opacity-0 group-data-[active=true]:opacity-0 group-hover:translate-y-8 group-data-[active=true]:translate-y-8">
         <span className="w-max py-1 px-3 rounded-full bg-saffron text-white text-xs font-bold uppercase tracking-wider mb-3">
           {project.category}
         </span>
@@ -64,7 +69,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
       </div>
 
       {/* Hover/Active Reveal State (Fades in on hover or active) */}
-      <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-8 opacity-0 translate-y-8 transition-all duration-500 group-hover:opacity-100 group-data-[active=true]:opacity-100 group-hover:translate-y-0 group-data-[active=true]:translate-y-0">
+      <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-8 opacity-0 translate-y-8 transition duration-500 group-hover:opacity-100 group-data-[active=true]:opacity-100 group-hover:translate-y-0 group-data-[active=true]:translate-y-0">
         <h3 className="text-3xl font-bold mb-4 text-saffron">{project.title}</h3>
         <p className="text-white/90 text-lg leading-relaxed mb-8">{project.desc}</p>
         <div className="flex items-center gap-2 text-white font-semibold group/btn">

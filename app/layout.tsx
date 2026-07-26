@@ -17,6 +17,7 @@ import { Header } from "@/components/global/header";
 import { Footer } from "@/components/global/footer";
 import { ChatBubble } from "@/components/global/chat-bubble";
 import { ThemeProvider } from "@/components/global/theme-provider";
+import { FramerProvider } from "@/components/global/framer-provider";
 
 export default function RootLayout({
   children,
@@ -66,10 +67,12 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Header />
-          <main className="flex-1 pt-24">{children}</main>
-          <Footer />
-          <ChatBubble />
+          <FramerProvider>
+            <Header />
+            <main className="flex-1 pt-24">{children}</main>
+            <Footer />
+            <ChatBubble />
+          </FramerProvider>
         </ThemeProvider>
       </body>
     </html>

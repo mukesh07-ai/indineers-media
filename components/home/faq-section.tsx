@@ -1,9 +1,10 @@
 "use client"
 
 import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { m, AnimatePresence } from "framer-motion"
 import { Plus, MessageCircleQuestion } from "lucide-react"
 import { Container } from "@/components/ui/container"
+import Link from "next/link"
 
 const faqs = [
   {
@@ -41,7 +42,7 @@ export function FaqSection() {
           
           {/* Left Column: Context & Eye-Catching Header */}
           <div className="lg:col-span-5 lg:sticky lg:top-32">
-            <motion.div 
+            <m.div 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -61,15 +62,15 @@ export function FaqSection() {
               </p>
 
               <div className="flex items-center gap-6">
-                <a 
+                <Link 
                   href="/contact" 
-                  className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white transition-all duration-300 bg-navy dark:bg-white dark:text-navy rounded-full hover:bg-navy/90 dark:hover:bg-slate-200 shadow-lg shadow-navy/20 dark:shadow-white/10 hover:shadow-xl hover:shadow-navy/30 dark:hover:shadow-white/20 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-navy"
+                  className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white transition duration-300 bg-navy dark:bg-white dark:text-navy rounded-full hover:bg-navy/90 dark:hover:bg-slate-200 shadow-lg shadow-navy/20 dark:shadow-white/10 hover:shadow-xl hover:shadow-navy/30 dark:hover:shadow-white/20 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-navy"
                 >
                   Ask a Question
                   <MessageCircleQuestion className="w-5 h-5 ml-2 group-hover:scale-110 transition-transform" />
-                </a>
+                </Link>
               </div>
-            </motion.div>
+            </m.div>
           </div>
 
           {/* Right Column: Premium Glassmorphic Accordion */}
@@ -78,19 +79,20 @@ export function FaqSection() {
               const isOpen = openIndex === index
 
               return (
-                <motion.div 
+                <m.div 
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  key={index} 
-                  className={`group relative rounded-3xl transition-all duration-500 overflow-hidden ${
+                  key={faq.question} 
+                  className={`group relative rounded-3xl transition-[background-color,border-color,box-shadow,color] duration-500 overflow-hidden ${
                     isOpen 
                       ? 'bg-white/90 dark:bg-slate-900/90 shadow-[0_8px_30px_rgb(0,0,0,0.06)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.3)] border-black/5 dark:border-white/10' 
                       : 'bg-white/40 dark:bg-slate-900/40 hover:bg-white/70 dark:hover:bg-slate-900/70 border-transparent hover:border-black/5 dark:hover:border-white/5'
                   } border backdrop-blur-xl`}
                 >
                   <button
+                    type="button"
                     onClick={() => setOpenIndex(isOpen ? null : index)}
                     className="flex items-center justify-between w-full p-6 md:p-8 text-left focus:outline-none z-10 relative"
                     aria-expanded={isOpen}
@@ -100,26 +102,27 @@ export function FaqSection() {
                     }`}>
                       {faq.question}
                     </span>
-                    <div className={`shrink-0 flex items-center justify-center w-12 h-12 rounded-full transition-all duration-300 ${
+                    <div className={`shrink-0 flex items-center justify-center w-12 h-12 rounded-full transition-colors duration-300 ${
                       isOpen 
                         ? 'bg-saffron text-white shadow-lg shadow-saffron/30' 
                         : 'bg-navy/5 dark:bg-white/10 text-navy dark:text-white group-hover:bg-navy/10 dark:group-hover:bg-white/20'
                     }`}>
-                      <motion.div
+                      <m.div
                         animate={{ rotate: isOpen ? 135 : 0 }}
                         transition={{ duration: 0.3, ease: "easeInOut" }}
                       >
                         <Plus className="w-5 h-5 stroke-[2.5]" />
-                      </motion.div>
+                      </m.div>
                     </div>
                   </button>
                   
                   <AnimatePresence initial={false}>
                     {isOpen && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
+                      <m.div
+                        initial={{ scaleY: 0.9, opacity: 0 }}
+                        animate={{ scaleY: 1, opacity: 1 }}
+                        exit={{ scaleY: 0.9, opacity: 0 }}
+                        style={{ transformOrigin: "top" }}
                         transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }}
                       >
                         <div className="px-6 pb-8 md:px-8 md:pb-8 pt-0 relative z-10">
@@ -128,7 +131,7 @@ export function FaqSection() {
                             {faq.answer}
                           </p>
                         </div>
-                      </motion.div>
+                      </m.div>
                     )}
                   </AnimatePresence>
 
@@ -136,7 +139,7 @@ export function FaqSection() {
                   {isOpen && (
                     <div className="absolute inset-0 bg-gradient-to-br from-saffron/5 via-transparent to-transparent pointer-events-none" />
                   )}
-                </motion.div>
+                </m.div>
               )
             })}
           </div>
