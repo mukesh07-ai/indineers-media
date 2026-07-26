@@ -150,20 +150,44 @@ export function InteractiveIndiaMap({ className, variant = 'default' }: Interact
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.15, ease: "easeOut" }}
-              className="absolute z-[100] bg-white/90 dark:bg-[#0A192F]/70 backdrop-blur-xl border border-black/10 dark:border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.2)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.5)] rounded-xl p-4 w-[230px] overflow-hidden flex flex-col pointer-events-auto"
+              className="absolute z-[100] bg-white dark:bg-[#0A192F] shadow-[0_8px_32px_rgba(0,0,0,0.3)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.6)] rounded-xl p-4 w-[230px] overflow-hidden flex flex-col pointer-events-auto border border-black/10 dark:border-white/20"
               style={{ left: tooltipPos.x, top: tooltipPos.y }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-black/5 dark:from-white/10 to-transparent pointer-events-none" />
               
-              <div className="relative">
-                <div className="flex items-center gap-2 mb-3 border-b border-black/10 dark:border-white/10 pb-2">
+              <motion.div 
+                className="relative"
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+                variants={{
+                  hidden: { opacity: 0 },
+                  visible: { 
+                    opacity: 1,
+                    transition: { staggerChildren: 0.1, delayChildren: 0.15 }
+                  }
+                }}
+              >
+                <motion.div 
+                  className="flex items-center gap-2 mb-3 border-b border-black/10 dark:border-white/10 pb-2"
+                  variants={{
+                    hidden: { opacity: 0, y: 5 },
+                    visible: { opacity: 1, y: 0, transition: { duration: 0.3, ease: "easeOut" } }
+                  }}
+                >
                   <div className="w-2 h-2 rounded-full bg-saffron animate-pulse shadow-[0_0_8px_rgba(255,153,51,0.8)]" />
                   <h4 className="font-bold text-navy dark:text-white text-[13px] tracking-wider uppercase drop-shadow-sm">
                     {STATE_DATA[activeState].name}
                   </h4>
-                </div>
+                </motion.div>
                 
-                <div className="flex flex-col gap-2.5 mb-4 pointer-events-none">
+                <motion.div 
+                  className="flex flex-col gap-2.5 mb-4 pointer-events-none"
+                  variants={{
+                    hidden: { opacity: 0, y: 5 },
+                    visible: { opacity: 1, y: 0, transition: { duration: 0.3, ease: "easeOut" } }
+                  }}
+                >
                   <div className="flex justify-between items-center group">
                     <span className="text-ink/60 dark:text-white/60 text-[10px] font-semibold uppercase tracking-widest transition-colors">Projects</span>
                     <span className="font-bold text-navy dark:text-white text-xs bg-black/5 dark:bg-white/10 px-2 py-1 rounded border border-black/10 dark:border-white/10 shadow-inner">
@@ -182,18 +206,22 @@ export function InteractiveIndiaMap({ className, variant = 'default' }: Interact
                       {STATE_DATA[activeState].candidates.toLocaleString()}
                     </span>
                   </div>
-                </div>
+                </motion.div>
                 
-                <button 
-                  onClick={(e) => {
+                <motion.button 
+                  onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                     e.stopPropagation()
                     handlePopupClick(activeState)
                   }}
-                  className="w-full bg-saffron hover:bg-saffron/90 transition-colors text-white text-[10px] font-bold uppercase tracking-widest py-2 rounded-lg cursor-pointer flex justify-center items-center gap-1 shadow-lg"
+                  variants={{
+                    hidden: { opacity: 0, y: 5 },
+                    visible: { opacity: 1, y: 0, transition: { duration: 0.3, ease: "easeOut" } }
+                  }}
+                  className="w-full bg-saffron hover:brightness-110 transition-all active:scale-95 text-white text-[10px] font-bold uppercase tracking-widest py-2 rounded-lg cursor-pointer flex justify-center items-center gap-1 shadow-lg hover:shadow-saffron/40"
                 >
-                  View Projects <span>→</span>
-                </button>
-              </div>
+                  View Projects <span className="text-sm leading-none ml-0.5">→</span>
+                </motion.button>
+              </motion.div>
             </motion.div>
           )}
         </AnimatePresence>

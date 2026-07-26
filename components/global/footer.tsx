@@ -170,7 +170,7 @@ export function Footer() {
                 <span className="w-2 h-2 rounded-full bg-saffron shadow-[0_0_10px_rgba(255,153,51,0.8)]" />
                 OUR REACH
               </h4>
-              <div className="w-full hover:scale-105 transition-transform duration-500">
+              <div className="w-full transition-transform duration-500">
                 <InteractiveIndiaMap variant="minimal" />
               </div>
             </div>
