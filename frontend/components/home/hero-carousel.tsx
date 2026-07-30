@@ -82,14 +82,14 @@ export function HeroCarousel() {
           className="absolute inset-0 z-0"
         >
           {/* Enhanced overlay gradient for better text readability and premium feel */}
-          <div className="absolute inset-0 bg-gradient-to-r from-navy/95 dark:from-slate-950/95 via-navy/80 dark:via-slate-950/80 to-transparent z-10" />
-          <div className="absolute inset-0 bg-gradient-to-t from-navy/90 dark:from-slate-950/90 via-transparent to-transparent z-10" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 dark:from-black/90 via-black/50 dark:via-black/60 to-transparent z-10" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 dark:from-black/90 via-transparent to-transparent z-10" />
           <Image 
             src={slides[current].image}
             alt={slides[current].title}
             fill
             sizes="100vw"
-            className="object-cover opacity-60 mix-blend-overlay"
+            className="object-cover"
             priority={current === 0}
           />
         </m.div>
